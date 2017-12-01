@@ -170,7 +170,31 @@ var interval = null
 
 			ctx.translate(x, y);
 			ctx.beginPath();
-			ctx.arc(0, 0, 5, 0, Math.PI*2, true);
+
+			switch (this.nodes[i].type)
+			{
+				case 'apartment':
+					ctx.arc(0, 0, 5, 0, Math.PI*2, true);
+					break;
+				case 'house':
+					ctx.fillRect(0, 0, 10, 10)
+					break;
+				case 'flat':
+					ctx.moveTo(0, 0);
+					ctx.lineTo(-5, 10);
+					ctx.lineTo(5, 10);
+					break;
+				default:
+					ctx.arc(0, 0, 5, 0, Math.PI*2, true);
+			}
+
+			// ctx.arc(0, 0, 5, 0, Math.PI*2, true);
+			// ctx.fillRect(0, 0, 10, 10)
+
+			// ctx.moveTo(100, 100);
+			// ctx.lineTo(95, 110);
+			// ctx.lineTo(105, 110);
+
 			ctx.fill();
 			ctx.closePath();
 			
@@ -217,7 +241,7 @@ var interval = null
 		{
 			nodes.add( new Node(data[i]) );
 		}
-		var random_rooms = Math.round( Math.random() * 10 );
+		var random_rooms = Math.round( Math.random() * 2000 );
 		var random_area = Math.round( Math.random() * 2000 );
 		nodes.add( new Node({rooms: random_rooms, area: random_area, type: false}) );
 
@@ -229,7 +253,7 @@ var interval = null
 		let types = ['house', 'apartment', 'flat']
 		for(var i = 0; i < 3; i++){
 			for(var ct = 0; ct < 5; ct++){
-				var random_rooms = Math.round( Math.random() * 10 );
+				var random_rooms = Math.round( Math.random() * 2000 );
 				var random_area = Math.round( Math.random() * 2000 );
 				data.push({type: types[i], area: random_area, rooms: random_rooms})
 			}
